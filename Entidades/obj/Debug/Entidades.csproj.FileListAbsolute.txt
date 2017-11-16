@@ -1,0 +1,5 @@
+c:\users\santi\documents\visual studio 2013\Projects\Prueba1\Entidades\bin\Debug\Entidades.dll.config
+c:\users\santi\documents\visual studio 2013\Projects\Prueba1\Entidades\bin\Debug\Entidades.dll
+c:\users\santi\documents\visual studio 2013\Projects\Prueba1\Entidades\bin\Debug\Entidades.pdb
+c:\users\santi\documents\visual studio 2013\Projects\Prueba1\Entidades\obj\Debug\Entidades.dll
+c:\users\santi\documents\visual studio 2013\Projects\Prueba1\Entidades\obj\Debug\Entidades.pdb

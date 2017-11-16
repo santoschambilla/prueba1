@@ -1,0 +1,12 @@
+c:\users\santi\documents\visual studio 2013\Projects\Prueba1\WebApp\bin\WebApp.dll.config
+c:\users\santi\documents\visual studio 2013\Projects\Prueba1\WebApp\bin\WebApp.dll
+c:\users\santi\documents\visual studio 2013\Projects\Prueba1\WebApp\bin\WebApp.pdb
+c:\users\santi\documents\visual studio 2013\Projects\Prueba1\WebApp\obj\Debug\WebApp.dll
+c:\users\santi\documents\visual studio 2013\Projects\Prueba1\WebApp\obj\Debug\WebApp.pdb
+c:\users\santi\documents\visual studio 2013\Projects\Prueba1\WebApp\bin\Entidades.dll
+c:\users\santi\documents\visual studio 2013\Projects\Prueba1\WebApp\bin\Negocio.dll
+c:\users\santi\documents\visual studio 2013\Projects\Prueba1\WebApp\bin\Datos.dll
+c:\users\santi\documents\visual studio 2013\Projects\Prueba1\WebApp\bin\Entidades.pdb
+c:\users\santi\documents\visual studio 2013\Projects\Prueba1\WebApp\bin\Negocio.pdb
+c:\users\santi\documents\visual studio 2013\Projects\Prueba1\WebApp\bin\Datos.pdb
+c:\users\santi\documents\visual studio 2013\Projects\Prueba1\WebApp\obj\Debug\WebApp.csprojResolveAssemblyReference.cache

@@ -7,14 +7,14 @@
     <ProductVersion>
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>6df0cb2f-b3d9-40c4-a08b-e16760d7fb1e</ProjectGuid>
+    <ProjectGuid>{A2D0683B-A145-4144-88FD-338A9F419C0B}</ProjectGuid>
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>WebApp</RootNamespace>
     <AssemblyName>WebApp</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <UseIISExpress>false</UseIISExpress>
+    <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -57,12 +57,63 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Default.aspx" />
+    <Content Include="ListarLibros.aspx" />
+    <Content Include="Scripts\jquery-1.11.1.min.js" />
+    <Content Include="Scripts\kendo.all.min.js" />
+    <Content Include="Styles\Bootstrap\editor.png" />
+    <Content Include="Styles\Bootstrap\imagebrowser.png" />
+    <Content Include="Styles\Bootstrap\indeterminate.gif" />
+    <Content Include="Styles\Bootstrap\loading-image.gif" />
+    <Content Include="Styles\Bootstrap\loading.gif" />
+    <Content Include="Styles\Bootstrap\loading_2x.gif" />
+    <Content Include="Styles\Bootstrap\markers.png" />
+    <Content Include="Styles\Bootstrap\markers_2x.png" />
+    <Content Include="Styles\Bootstrap\slider-h.gif" />
+    <Content Include="Styles\Bootstrap\slider-v.gif" />
+    <Content Include="Styles\Bootstrap\sprite.png" />
+    <Content Include="Styles\Bootstrap\sprite_2x.png" />
+    <Content Include="Styles\Bootstrap\sprite_kpi.png" />
+    <Content Include="Styles\Bootstrap\sprite_kpi_2x.png" />
+    <Content Include="Styles\kendo.bootstrap.min.css" />
+    <Content Include="Styles\kendo.common.core.min.css" />
+    <Content Include="Styles\kendo.default.min.css" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ListarLibros.aspx.cs">
+      <DependentUpon>ListarLibros.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ListarLibros.aspx.designer.cs">
+      <DependentUpon>ListarLibros.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Entidades\Entidades.csproj">
+      <Project>{62322cab-4a59-41fd-8667-c8aa3b9be7bd}</Project>
+      <Name>Entidades</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Negocio\Negocio.csproj">
+      <Project>{13efe5d0-fcc8-475b-b26f-487b46fd1dda}</Project>
+      <Name>Negocio</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -75,12 +126,11 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>False</UseIIS>
+          <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerPort>2233</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>
-          </IISUrl>
+          <IISUrl>http://localhost:2233/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

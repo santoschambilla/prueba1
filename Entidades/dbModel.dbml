@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="bdbiblio" Class="dbModelDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=DESKTOP-JP1HIJD\SIST;Initial Catalog=bdbiblio;User ID=sa" SettingsObjectName="Entidades.Properties.Settings" SettingsPropertyName="bdbiblioConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.autor" Member="autor">
+    <Type Name="autor">
+      <Column Name="id_autor" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="nombre" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Association Name="autor_autor_libro" Member="autor_libro" ThisKey="id_autor" OtherKey="id_autor" Type="autor_libro" />
+    </Type>
+  </Table>
+  <Table Name="dbo.autor_libro" Member="autor_libro">
+    <Type Name="autor_libro">
+      <Column Name="id_autor" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="id_libro" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="autor_autor_libro" Member="autor" ThisKey="id_autor" OtherKey="id_autor" Type="autor" IsForeignKey="true" />
+      <Association Name="libro_autor_libro" Member="libro" ThisKey="id_libro" OtherKey="id_libro" Type="libro" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.libro" Member="libro">
+    <Type Name="libro">
+      <Column Name="id_libro" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="titulo" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
+      <Column Name="fecha" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Association Name="libro_autor_libro" Member="autor_libro" ThisKey="id_libro" OtherKey="id_libro" Type="autor_libro" />
+    </Type>
+  </Table>
+</Database>
