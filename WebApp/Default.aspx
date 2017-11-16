@@ -6,23 +6,45 @@
 <head runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>Agregar/Editar</title>
-    <link href="Styles/kendo.common.core.min.css" rel="stylesheet" />
-    <link href="Styles/kendo.default.min.css" rel="stylesheet" />
-    <link href="Styles/kendo.bootstrap.min.css" rel="stylesheet" />
 
-    <script src="Scripts/jquery-1.11.1.min.js"></script>
+
+    <link href="Styles/kendo.common-bootstrap.min.css" rel="stylesheet" />
+    <link href="Styles/kendo.bootstrap.min.css" rel="stylesheet" />
+    
+    <script src="Script/jquery.min.js"></script>
     <script src="Scripts/kendo.all.min.js"></script>
 </head>
 <body>
     <script type="text/javascript">
         $(document).ready(function () {
+
+            $("#edicion").kendoDatePicker({
+                format: "dd/MM/yyyy",
+                change: function () {
+                    //dd/mm/yyyy
+                    var value = this.value();
+                    if (value == null) {
+                        alert("Seleccione fecha.");
+                        this.value("");
+                    }
+                }
+
+            });
+            $("#edicion").focusout(function () {
+                var df = document.getElementById("edicion").value;
+                var date_regex = /^(0[1-9]|1\d|2\d|3[01])\/(0[1-9]|1[0-2])\/(19|20)\d{2}$/;
+                if (!date_regex.test(df.toUpperCase())) {
+                    alert("Fecha Incorrecta.");
+                    $("#edicion").val("");
+                }
+            });
             dsAutor = new kendo.data.DataSource({
-                dataBind: false,
+                //dataBind: false,
                 pageSize: 10,
                 schema: {
                     data: "d",
                     model: {
-                        id: "id",
+                        id: "idAutor",
                         fields: {
                             idAutor: { editable: true, nullable: false, validation: { required: true } },
                             nombre: { validation: { required: true } }
@@ -56,12 +78,13 @@
 
 
             var grid = $("#grid").kendoGrid({
-                autoBind: false,
+                //autoBind: false,
+                widh:50,
                 resizable: true,
                 selectable: "row",
                 columns: [
-                    { field: "nombre", title: "Nombre" }/*,
-                    { title: "", template: '<input type="checkbox" id="idch" name="idche" />' }*/
+                    { field: "nombre", title: "Nombre" },
+                    { title: "", template: '<input type="checkbox" id="idche#=idAutor#" name="idche#=idAutor#" class="aut" />' }
                 ],
                 pageable: {
                     refresh: true,
@@ -83,13 +106,25 @@
                     var dItem = this.dataItem(selrow[0]);
                     idemov = dItem.cod;
                     tipmov = dItem.tipMov;
-                    //alertify.alert("IDMov: " + dItem.cod + " tipMov: " + dItem.tipMov);
-                    //$("#nomGal").val(dItem.nomGal);
-                    //alert("Nombre de Silo: " + dItem.nomGal);
-
                 }
             }).data("kendoGrid");
         })//ready
+        function lAutores() {
+            var d = "";
+            $(".aut").each(function () {
+                e = $(this).attr("name");
+                //alert("==>"+e);
+                if ($('#' + e).is(':checked')) {
+                    d += e.substr(5, e.length) + ",";
+                }
+            })
+            
+            $("#laut").val(d);
+        }
+        function borrar() {
+            $("#edicion").val("");
+            $("#titulo").val("");
+        }
     </script>
     <form id="form1" runat="server">
     <div>
@@ -97,18 +132,19 @@
     
     </div>
     <div>
-        Titulo: <input type="text" name="titulo" id="titulo" placeholder="Ingrese Título" />
+        Titulo: <input type="text" name="titulo" id="titulo" placeholder="Ingrese Título" style="width:350px" />
     </div>
     <div>
-        Edición:<input type="text" name="Edición" id="edición" placeholder="Seleccione Edición" />
+        Edición:<input type="text" name="edicion" id="edicion" placeholder="Seleccione Edición" />
     </div>
-    <input type="checkbox" id="idch" name="idche" />
+    <input type="hidden" id="laut" name="laut" />
     <div>Lista de Autores</div>
-        <div id="grid">
+        <div id="grid" style="width:400px">
             
         </div>
     <div>
-        <asp:Button ID="Button1" runat="server" Text="Gurdar" /><input type="button" id="cancelar" value="Cancelar" />
+        <asp:Button ID="Button1" runat="server" Text="Gurdar" OnClientClick="lAutores()" OnClick="Button1_Click"/><input type="button" id="cancelar" value="Cancelar" onclick="borrar()"/>
+        <asp:Label ID="Label1" runat="server" Text=""></asp:Label>
     </div>
     </form>
 </body>
