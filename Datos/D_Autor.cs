@@ -24,13 +24,47 @@ namespace Datos
             }
             return res;
         }
-        public List<E_Autor> listAutores() {
+        public IEnumerable<autor> listAutores() {
+            List<autor> lPer = new List<autor>();
             var cn = from a in db.autor
-                     select new E_Autor { 
-                         idAutor=a.id_autor,
-                         nombre=a.nombre
-                     };
-            return cn.ToList();
+                     select a;
+            foreach (autor dA in cn){
+                autor mA=new autor();
+                mA.id_autor=dA.id_autor;
+                mA.nombre = dA.nombre;
+                lPer.Add(mA);
+            }
+            return lPer.ToList();
+        }
+        public IEnumerable<autor> addAutor(IEnumerable<autor> a) {
+            var res = new List<autor>();
+            using (var db = new dbModelDataContext()) {
+                foreach (var aVM in a) {
+                    var mA = new autor
+                    {
+                        nombre = aVM.nombre
+                    };
+                    res.Add(mA);
+                    db.autor.InsertOnSubmit(mA);
+                }
+                db.SubmitChanges();
+            }
+            return res.ToList();
+
+        }
+        public void updateAutor(IEnumerable<autor> a) {
+            using (var db = new dbModelDataContext()) {
+                foreach (var aVM in a) {
+                    var mAutor = new autor
+                    {
+                        id_autor=aVM.id_autor,
+                        nombre = aVM.nombre
+                    };
+                    db.autor.Attach(mAutor);
+                    db.Refresh(System.Data.Linq.RefreshMode.KeepCurrentValues, mAutor);
+                }
+                db.SubmitChanges();
+            }
         }
     }
 }

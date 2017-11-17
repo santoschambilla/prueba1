@@ -7,9 +7,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link href="Styles/kendo.common-bootstrap.min.css" rel="stylesheet" />
     <link href="Styles/kendo.bootstrap.min.css" rel="stylesheet" />
-    
     <script src="Script/jquery.min.js"></script>
-    <script src="Scripts/kendo.all.min.js"></script>
+    <script src="Script/kendo.all.min.js"></script>
     <title>Libros</title>
 </head>
 <body>
@@ -82,7 +81,7 @@
                 selectable: "row",
                 columns: [
                     { field: "titulo", title: "Título" },
-                    { field: "edicion", title: "Edición",template:'#=kendo.toString(edicion,"dd/MM/YYYY")#' },
+                    { field: "edicion", title: "Edición",template:'#=kendo.toString(edicion,"dd/MM/yyyy")#' },
                     { field: "nroAutores", title: "Autores" }
                 ],
                 pageable: {
@@ -103,12 +102,36 @@
                 change: function () {
                     var selrow = this.select();
                     var dItem = this.dataItem(selrow[0]);
-                    idemov = dItem.cod;
-                    tipmov = dItem.tipMov;
+                    editForm(dItem);
                 }
             }).data("kendoGrid");
+            $("#buscar").keyup(function () {
+
+                var valor = $("#buscar").val();
+                if (valor) {
+                    grid.dataSource.filter({
+                        logic: "or",
+                        filters: [{ field: "titulo", operator: "contains", value: valor },
+                            { field: "edicion", operator: "contains", value: valor },
+                            { field: "nroAutores", operator: "contains", value: valor }
+                        ]
+                    });
+                }
+                else {
+                    grid.dataSource.filter({});
+                }
+            });
             
         })//ready
+        function editForm(x) {
+            $("#titulo").val(x.titulo);
+            $("#edicion").val(kendo.toString(x.edicion,"dd/MM/yyyy"));
+        }
+        function Borrar() {
+            $("#titulo").val("");
+            $("#edicion").val("");
+        }
+        
     </script>
     <form id="form1" runat="server">
     <div>
@@ -116,11 +139,11 @@
     </div>
         <div>
             Titulo:<input type="text" id="titulo" name="titulo" placeholder="Titulo" />
-            Autores: <input type="text" id="autores" name="autores" placeholder="Autores"/>
+            Buscar: <input type="search" id="buscar" name="buscar" placeholder="Ingrese Titulo, edicion, nro de autores" style="width:350px"/>
         </div>
         <div>
             Edición:<input type="text" id="edicion" name="edicion"  placeholder="Edición"/>
-            <input type="button" id="buscar" name="buscar" value="Buscar" />
+            <input type="button" id="bbuscar" name="bbuscar" value="Buscar" />
         </div>
         <div id="grid">
             

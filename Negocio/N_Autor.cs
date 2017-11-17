@@ -14,8 +14,15 @@ namespace Negocio
         public string addAutor(autor a) {
             return dA.addAutor(a);
         }
-        public List<E_Autor> listAutores() {
+        public IEnumerable<autor> listAutores()
+        {
             return dA.listAutores();
+        }
+        public IEnumerable<autor> addAutor(IEnumerable<autor> a) {
+            return dA.addAutor(a);
+        }
+        public void updateAutor(IEnumerable<autor> a) {
+            dA.updateAutor(a);
         }
     }
 }

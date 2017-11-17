@@ -10,9 +10,10 @@
 
     <link href="Styles/kendo.common-bootstrap.min.css" rel="stylesheet" />
     <link href="Styles/kendo.bootstrap.min.css" rel="stylesheet" />
-    
     <script src="Script/jquery.min.js"></script>
-    <script src="Scripts/kendo.all.min.js"></script>
+    <script src="Script/kendo.all.min.js"></script>
+    
+    
 </head>
 <body>
     <script type="text/javascript">
@@ -21,7 +22,6 @@
             $("#edicion").kendoDatePicker({
                 format: "dd/MM/yyyy",
                 change: function () {
-                    //dd/mm/yyyy
                     var value = this.value();
                     if (value == null) {
                         alert("Seleccione fecha.");
@@ -44,9 +44,9 @@
                 schema: {
                     data: "d",
                     model: {
-                        id: "idAutor",
+                        id: "id_autor",
                         fields: {
-                            idAutor: { editable: true, nullable: false, validation: { required: true } },
+                            id: { editable: true, nullable: false, validation: { required: true } },
                             nombre: { validation: { required: true } }
                         }
                     },
@@ -60,21 +60,37 @@
                 },
                 batch: true,
                 transport: {
+                    create: {
+                        url: "Default.aspx/addAutor",
+                        contentType: "application/json; charset=utf-8",
+                        type: "POST"
+                    },
                     read: {
                         url: "Default.aspx/listAutores",
                         contentType: "application/json; charset=utf-8",
                         type: "POST"
                     },
+                    update: {
+                        url: "Default.aspx/updateAutor",
+                        contentType: "application/json; charset=utf-8",
+                        type: "POST"
+                    },
+                    destroy: {
+                        url: "Default.aspx/deleteAutor",
+                        contentType: "application/json; charset=utf-8",
+                        type: "POST"
+                    },
                     parameterMap: function (data, operation) {
                         if (data.models) {
-                            return JSON.stringify({ s: data.models });
+                            var dat = kendo.stringify({ a: data.models });
+                            return dat;
                         } else if (operation == "read") {
                             data = $.extend({ sort: null, filter: null}, data);
                             return JSON.stringify(data);
                         }
                     }
                 }
-            });//dskardex
+            });//dsAutor
 
 
             var grid = $("#grid").kendoGrid({
@@ -84,7 +100,23 @@
                 selectable: "row",
                 columns: [
                     { field: "nombre", title: "Nombre" },
-                    { title: "", template: '<input type="checkbox" id="idche#=idAutor#" name="idche#=idAutor#" class="aut" />' }
+                    { title: "", template: '<input type="checkbox" id="idche#=id_autor#" name="idche#=id_autor#" class="aut" />' },
+                    {
+                        command: [
+                           {
+                               name: "edit",
+                               text: {
+                                   edit: "Editar",
+                                   update: "Guardar",
+                                   cancel: "Cancelar Cambios"
+                               }
+                           },
+                           {
+                               name: "destroy",
+                               text: "Eliminar"
+                           }
+                        ]
+                    }
                 ],
                 pageable: {
                     refresh: true,
@@ -106,6 +138,16 @@
                     var dItem = this.dataItem(selrow[0]);
                     idemov = dItem.cod;
                     tipmov = dItem.tipMov;
+                },
+                toolbar: [{ name: "create", text: "Adicionar" }],
+                editable: {
+                    mode: "popup",
+                    update: true,
+                    destroy: true,
+                    confirmation: "Esta seguro de Eliminar?",
+                    window: {
+                        title: "Editar Autor"
+                    }
                 }
             }).data("kendoGrid");
         })//ready
@@ -139,7 +181,7 @@
     </div>
     <input type="hidden" id="laut" name="laut" />
     <div>Lista de Autores</div>
-        <div id="grid" style="width:400px">
+        <div id="grid" style="width:600px">
             
         </div>
     <div>

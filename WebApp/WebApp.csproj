@@ -762,6 +762,7 @@
   <ItemGroup>
     <Content Include="Default.aspx" />
     <Content Include="ListarLibros.aspx" />
+    <Content Include="RegistraAutor.aspx" />
     <Content Include="Script\angular.min.js" />
     <Content Include="Script\cultures\kendo.culture.af-ZA.min.js" />
     <Content Include="Script\cultures\kendo.culture.af.min.js" />
@@ -1720,6 +1721,13 @@
       <DependentUpon>ListarLibros.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RegistraAutor.aspx.cs">
+      <DependentUpon>RegistraAutor.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RegistraAutor.aspx.designer.cs">
+      <DependentUpon>RegistraAutor.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Entidades\Entidades.csproj">

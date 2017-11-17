@@ -17,9 +17,21 @@ namespace WebApp
 
         }
         [WebMethod]
-        public static List<E_Autor> listAutores() {
+        public static IEnumerable<autor> listAutores()
+        {
+            
             N_Autor nA = new N_Autor();
-            return nA.listAutores();
+            return nA.listAutores().ToList();
+        }
+        [WebMethod]
+        public static IEnumerable<autor> addAutor(IEnumerable<autor> a) {
+            N_Autor nA = new N_Autor();
+            return nA.addAutor(a);
+        }
+        [WebMethod]
+        public static void updateAutor(IEnumerable<autor> a) {
+            N_Autor nA = new N_Autor();
+            nA.updateAutor(a);
         }
 
         protected void Button1_Click(object sender, EventArgs e)
