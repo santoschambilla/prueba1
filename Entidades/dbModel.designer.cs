@@ -20,7 +20,7 @@ namespace Entidades
 	using System.Linq.Expressions;
 	using System.ComponentModel;
 	using System;
-	
+    using System.Configuration;
 	
 	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="bdbiblio")]
 	public partial class dbModelDataContext : System.Data.Linq.DataContext
@@ -42,34 +42,12 @@ namespace Entidades
     #endregion
 		
 		public dbModelDataContext() : 
-				base(global::Entidades.Properties.Settings.Default.bdbiblioConnectionString, mappingSource)
-		{
-			OnCreated();
-		}
+				base(ConfigurationManager.ConnectionStrings["ConnectionString"].ToString())
+        {
+            OnCreated();
+        }
 		
-		public dbModelDataContext(string connection) : 
-				base(connection, mappingSource)
-		{
-			OnCreated();
-		}
 		
-		public dbModelDataContext(System.Data.IDbConnection connection) : 
-				base(connection, mappingSource)
-		{
-			OnCreated();
-		}
-		
-		public dbModelDataContext(string connection, System.Data.Linq.Mapping.MappingSource mappingSource) : 
-				base(connection, mappingSource)
-		{
-			OnCreated();
-		}
-		
-		public dbModelDataContext(System.Data.IDbConnection connection, System.Data.Linq.Mapping.MappingSource mappingSource) : 
-				base(connection, mappingSource)
-		{
-			OnCreated();
-		}
 		
 		public System.Data.Linq.Table<autor> autor
 		{

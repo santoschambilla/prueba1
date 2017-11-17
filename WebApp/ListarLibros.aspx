@@ -17,7 +17,7 @@
             $("#edicion").kendoDatePicker({
                 format: "dd/MM/yyyy",
                 change: function () {
-                    //dd/mm/yyyy
+                    
                     var value = this.value();
                     if (value == null) {
                         alert("Seleccione fecha.");
@@ -35,7 +35,7 @@
                 }
             });
             dsLibros = new kendo.data.DataSource({
-                //dataBind: false,
+                
                 pageSize: 10,
                 schema: {
                     data: "d",
